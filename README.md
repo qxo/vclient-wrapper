@@ -1,4 +1,4 @@
-# vClient wrapper (2013)
+## vClient wrapper (2013)
 
 At the time I built up this wrapper, the API to retrieve info from vSphere 
 service was difficult to use and hard to understand. So, I decided to create
@@ -7,14 +7,14 @@ by vSphere service. To do so, I wrote the wrapper based on the VMware VI (vSpher
 Java API [1]. This was used to connect to the vSphere version 5.1.
 
 
-# Dependencies
+## Dependencies
 
 * log4j
 * gson
 * vijava
 
 
-# Ref
+## Ref
 
 [1] http://vijava.sourceforge.net/
 
