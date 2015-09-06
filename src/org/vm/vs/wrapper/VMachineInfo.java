@@ -182,7 +182,7 @@ public class VMachineInfo implements
 		
 		int usage = perfInfo.getCpuUsage();
 		int max = runtimeInfo.getMaxCpuUsage();
-		int avg = (usage * 100) / max;
+		int avg = max >0 ?  (usage * 100) / max : -1;
 		
 		cpu.put("usage", perfInfo.getCpuUsage()); // in MHz
 		cpu.put("usageAvg", avg); // in %
@@ -323,9 +323,13 @@ public class VMachineInfo implements
 	 * @return the URL to open a remote console
 	 */
 	public String getRemoteUrl() {
-		String remoteUrl = "{vcUrl}?vm={vcId}:VirtualMachine:{vmId}";
+	   String remoteUrl = "{vcUrl}?vm={vcId}:VirtualMachine:{vmId}";
+	    if(vcInstanceUUID == null){
+	        remoteUrl = "{vcUrl}?VirtualMachine:{vmId}";	    
+	    }else{
+	        remoteUrl = remoteUrl.replace("{vcId}", vcInstanceUUID);        
+	    }	
 		remoteUrl = remoteUrl.replace("{vcUrl}", remoteConsoleUrl);
-		remoteUrl = remoteUrl.replace("{vcId}", vcInstanceUUID);
 		remoteUrl = remoteUrl.replace("{vmId}", vmId);
 		return remoteUrl;
 	}
