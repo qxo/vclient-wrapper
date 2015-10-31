@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import org.apache.log4j.Logger;
 
+import com.vmware.vim25.CustomFieldDef;
 import com.vmware.vim25.FileFault;
 import com.vmware.vim25.InsufficientResourcesFault;
 import com.vmware.vim25.InvalidState;
@@ -24,7 +25,7 @@ public class VMachine implements Machine {
 	
 	private VirtualMachine vm;
 	
-	private AccessControlPermEnum permission = AccessControlPermEnum.USER;
+	private AccessControlPermEnum permission = AccessControlPermEnum.ADMIN;
 	
 	
 	public VMachine(VirtualMachine vm) {
@@ -33,7 +34,8 @@ public class VMachine implements Machine {
 		// Sets the access control to the virtual machine.
 		try {
 			String mask = VUtil.getCustomAttributeValue(vm, VMachineInfo.VM_CFIELD_CONTROL_MASK_NAME);
-			
+			final CustomFieldDef[] availableField = vm.getAvailableField();
+
 			if (mask != null) {
 				int id = Integer.valueOf(mask).intValue();
 				permission = permission.getAccessControl(id);
@@ -91,12 +93,13 @@ public class VMachine implements Machine {
 		case ROOT:
 		case ADMIN:		
 			Task task = vm.resetVM_Task();
+			//vm.rebootGuest();
 			if (task.waitForTask() == Task.SUCCESS) {
 				log.debug("VM reset!");
 			}
 			break;			
 		default:
-			throw new UserPermException("The user doesn't have enough permissions to execute this action.");
+			throw new UserPermException("The user doesn't have enough permissions to execute this action!permission="+permission);
 		}
 	}
 	

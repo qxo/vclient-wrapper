@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>qxo</groupId>
+  <artifactId>vclient-wrapper</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0b01</version>
+  <name>vclient-wrapper</name>
+  <url>https://github.com/qxo/vclient-wrapper</url>
+  <properties>
+  		<version.slf4j>1.7.6</version.slf4j>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    <groupId>com.vmware</groupId>
+    <artifactId>vijava</artifactId>
+    <version>55b20130927</version>
+</dependency>
+
+
+    <dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    	<version>2.3.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>dom4j</groupId>
+    	<artifactId>dom4j</artifactId>
+    	<version>1.6.1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-api</artifactId>
+    	<version>${version.slf4j}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>log4j-over-slf4j</artifactId>
+    	<version>${version.slf4j}</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-simple</artifactId>
+    	<version>${version.slf4j}</version>
+    	<scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+  	<sourceDirectory>src</sourceDirectory>
+  	<testSourceDirectory>test</testSourceDirectory>
+    <testResources>
+    	<testResource><directory>conf</directory></testResource>
+    </testResources>
+  </build>
+</project>
